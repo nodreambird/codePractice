@@ -33,3 +33,29 @@ public:
         if (faster == cur) return true;
     }
 };
+
+/* also could use unordered map to store address of each node and check */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_set<ListNode *> nodeAddr;
+        ListNode * ptr = head;
+        while (ptr != NULL){
+            if (nodeAddr.find(ptr) != nodeAddr.end()){
+                return true;
+            }else{
+                nodeAddr.insert(ptr);
+            }
+            ptr = ptr->next;
+        }
+        return false;
+    }
+};

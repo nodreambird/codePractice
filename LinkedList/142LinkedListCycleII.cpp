@@ -20,6 +20,8 @@ Can you solve it without using extra space?
 /*
 Note:
    The distance between two pointer meet and start of cycle is same as from head to the start of the cycle:
+   time: O(N+R) where R is length of loop
+   space: O(1) no additional mem use except for the ptr
 
    If it takes K steps for slow pointer to meet fast pointer
    Fast pointer always takes 2K steps when they meet.This is because each step slow makes, fast makes 2 steps.
@@ -75,3 +77,33 @@ public:
     }
 };
 
+/*
+Another solution using unordered_set to store address of each node
+time O(N)
+space O(N) <- need to store address for each node
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_set<ListNode *> nodeAddr;
+        ListNode * ptr = head;
+        while (ptr != NULL){
+            if (nodeAddr.find(ptr) != nodeAddr.end()){
+                return ptr;
+            }else{
+                nodeAddr.insert(ptr);
+            }
+            ptr = ptr->next;
+        }
+        return NULL;
+    }
+};
