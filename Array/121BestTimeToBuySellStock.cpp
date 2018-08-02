@@ -22,13 +22,14 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 /*
  Note:
-   use two pointers, one points to beginning, one points to end;
+   use two pointers, one points to beginning, one points to next;
 
    if prices[end] - prices[begin] > 0, move end forward
      this is to find continuous increasing subarray, record the largest profit 
    if prices[end] - prices[begin] <= 0, move begin to end position
      this is to start to find a new continuous increasing subarray.
-
+   space: O(1)
+   time: O(n)
  
 */
 class Solution {
