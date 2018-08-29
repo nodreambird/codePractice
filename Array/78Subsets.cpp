@@ -52,8 +52,34 @@ add    [1]?   [2]?      [3]?
 
  for b, we also need to consider if we need to put in next element, 2, so we would have either [2] or just []
  then we need to consider next level as well.
- time :O(n^2)
+ time :O(2^n) for each element, we could go either take it or not take it, so it is 2^n
 
+*/
+class Solution {
+public:
+    void subset_rec(vector<int>& nums, vector<vector<int>> &res, vector<int> &sub, int index){    
+        if (index == nums.size()){
+            res.push_back(sub);
+            return;
+        }
+        /* select next position to be filled */
+        sub.push_back(nums[index]);
+        subset_rec(nums,res,sub,index+1);
+        /* select next position to not be filled */
+        sub.pop_back();
+        subset_rec(nums,res,sub,index+1);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> sub;
+        subset_rec(nums, res, sub,0);
+        return res;
+    }
+
+};
+
+/* 
+or 
 */
 class Solution {
 public:
